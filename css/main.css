@@ -38,7 +38,7 @@ nav ul li a
 nav .logo
 {
     float: left;
-    padding-left:10px
+    padding-left:20px
 }
 #banner .inner
 {
@@ -47,6 +47,7 @@ nav .logo
     margin: 0 auto;
     position: relative;
     top: 160px;
+    color: #fff;
 }
 #banner .inner h1
 {
@@ -61,7 +62,10 @@ button
 }
 #banner button
 {
-    padding: 14px 40px;
+    padding: 14px 30px;
+    top: 20px;
+    background: rgba(252, 66, 66, 0.94);
+    border-radius: 10px;
 }
 #banner .inner .more
 {
@@ -81,6 +85,7 @@ button
 }
 .logo a{
     color: #fff;
+    text-decoration: none;
 }
 hr
 {
@@ -131,11 +136,11 @@ p{
     background: #252F34;
     color: #fff;
 }
-.gray-section .img-section
+.gray-section .image-section
 {
     width: 45%;
 }
-.img-section
+.image-section img
 {
     width: 100%;
 }
@@ -193,6 +198,7 @@ p{
 }
 .purple-section .heading-wrapper
 {
+    margin: 0 auto;
     text-align: center;
 }
 .purple-section .hr
@@ -202,10 +208,19 @@ p{
 }
 .card
 {
-    float: left;
-    width: 90%;
-    min-height: 300%;
-    padding: 50px;
+    float:left;
+    width:50%;
+    min-height:300px;
+    padding:50px;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;
+}
+
+.card-group:after{
+    content:'';
+    display:block;
+    clear:both;
 }
 .card:first-child
 {
@@ -256,9 +271,10 @@ ul.share-group
 }
 .main-wrapper
 {
-    background: #444 url("../images/banner.jpg");
+    background: url("../images/banner.jpg");
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
+    overflow: hidden;
 }
