@@ -6,6 +6,14 @@
     <!-- 常规css reset -->
     <link rel="stylesheet" type="text/css" href="css/reset.css">
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script type="text/javascript" src="js/music-list.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/music.js"></script>
+    <script type="text/javascript">
+        jQuery(function() {
+            var musicPlayer = new MusicPlayer();
+        });
+    </script>
 </head>
 <body>
     <div class="main-wrapper">
@@ -21,6 +29,30 @@
                     <li><a href="#">订阅</a></li>
                 </ul>
             </nav>
+            <div class="music-wrapper">
+                <div class="music-info">
+                    <div class="star-img">
+                        <img src="images/music/star/ljr.jpg" alt="">
+                    </div>
+                    <div class="star-info">
+                        小美女
+                    </div>
+                </div>
+                <div class="music-doing">
+                    <span class="music-do">正在播放</span>
+                    <span class="music-name">See You Again</span>
+                </div>
+                <div class="music-audio">
+                    <audio src="media/See%20You%20Again.mp3" controls>
+                        <p>你的浏览器不支持HTML5</p>
+                    </audio>
+                </div>
+                <div class="music-button">
+                    <div class="btn-prev"><</div>
+                    <div class="btn-play play">+</div>
+                    <div class="btn-next">></div>
+                </div>
+            </div>
             <div id="banner">
                 <div class="inner">
                     <h1>喵星人</h1>
