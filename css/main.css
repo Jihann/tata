@@ -40,6 +40,25 @@ nav .logo
     float: left;
     padding-left:20px
 }
+.menu
+{
+    width: 300px;
+    height: 600px;
+    right: -300px;
+    float: right;
+    box-shadow: 0px 0px 20px #D8D8D8;
+    border-radius: 10px;
+    position: relative;
+}
+.menu .menu-content a
+{
+    color: #fff;
+    text-decoration: none;
+}
+.menu-content p
+{
+    text-align: center;
+}
 #banner .inner
 {
     max-width: 300px;
@@ -60,22 +79,31 @@ nav .logo
     margin: 50px 50px;
     box-shadow: 0px 0px 20px #D8D8D8;
     border-radius: 10px;
+    position: absolute;
+}
+.list
+{
+    display: none;
+}
+.aa
+{
+    display: block;
 }
 .music-info
 {
-    border-bottom: 1px solid #E3E5E0;
-    height: 110px;
+    height: 85px;
     position: relative;
 }
 .music-info .star-img img
 {
     width: 85px;
     height: 85px;
-    top: 10px;
+    top: 15px;
     left: 10px;
     position: absolute;
     display: block;
     border-radius: 50px;
+    cursor: pointer;
 }
 .music-info .star-info
 {
@@ -92,10 +120,15 @@ nav .logo
 }
 .music-doing .music-do
 {
-    color: green;
+    color: aqua;
     display: inline-block;
     margin-top: 50px;
     margin-left: 22px;
+}
+.music-name
+{
+    padding: 20px;
+    color: lime;
 }
 .music-audio audio
 {
@@ -103,7 +136,7 @@ nav .logo
 }
 .music-button
 {
-    height: 120px;
+    height: 115px;
     position: relative;
 }
 .btn-play,.btn-pause,.btn-prev,.btn-next
@@ -132,7 +165,7 @@ nav .logo
 }
 .btn-play,.btn-pause
 {
-    left: 146px;
+    left: 151px;
     top: 44px;
 }
 .play
@@ -152,6 +185,49 @@ nav .logo
 {
     top: 50px;
     right: 50px;
+}
+.music-footer
+{
+    color: #fff;
+}
+.music-footer ul
+{
+    list-style: none;
+    margin: 0;
+    float: left;
+}
+.music-footer ul li
+{
+    display: inline-block;
+    margin-left: 20px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+.icon-ama
+{
+    border: 2px solid greenyellow;
+    border-radius: 20px;
+}
+.icon-ama-click
+{
+    border: 2px solid red;
+}
+.icon-ran
+{
+    background-color: greenyellow;
+    border-radius: 20px;
+}
+.music-footer .icon-list
+{
+    width: 40px;
+    height: 24px;
+    float: right;
+    margin-right: 53px;
+    background: darkolivegreen;
+    cursor: pointer;
+    border-radius: 20px;
 }
 button
 {

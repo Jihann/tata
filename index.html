@@ -12,6 +12,17 @@
     <script type="text/javascript">
         jQuery(function() {
             var musicPlayer = new MusicPlayer();
+            jQuery("nav ul li").eq(3).hover(function(e) {
+                jQuery("div.menu").animate({
+                    right : 10
+                }, 500);
+            }, function() {});
+            jQuery("div.menu").hover(function() {
+            }, function() {
+                jQuery("div.menu").animate({
+                    right : -300
+                }, 500);
+            });
         });
     </script>
 </head>
@@ -25,10 +36,16 @@
                     <li><a href="#" class="active">首页</a></li>
                     <li><a href="#">登录</a></li>
                     <li><a href="#">注册</a></li>
-                    <li><a href="#">关注</a></li>
+                    <li><a href="#">菜单</a></li>
                     <li><a href="#">订阅</a></li>
                 </ul>
             </nav>
+            <div class="menu">
+                <div class="menu-content">
+                    <p><a href="#">逗比的欢乐世界</a></p>
+                    <p><a href="#">程序员与产品经理</a></p>
+                </div>
+            </div>
             <div class="music-wrapper">
                 <div class="music-info">
                     <div class="star-img">
@@ -51,6 +68,13 @@
                     <div class="btn-prev"><</div>
                     <div class="btn-play play">+</div>
                     <div class="btn-next">></div>
+                </div>
+                <div class="music-footer">
+                    <ul>
+                        <li class="icon-ama" title="点赞"></li>
+                        <li class="icon-ran" title="随机"></li>
+                    </ul>
+                    <div class="icon-list"></div>
                 </div>
             </div>
             <div id="banner">
