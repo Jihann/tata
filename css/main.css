@@ -75,15 +75,12 @@ nav .logo
 .music-wrapper
 {
     width: 355px;
-    height: 350px;
+    height: 402px;
     margin: 50px 50px;
     box-shadow: 0px 0px 20px #D8D8D8;
     border-radius: 10px;
     position: absolute;
-}
-.list
-{
-    display: none;
+    z-index: 200;
 }
 .aa
 {
@@ -91,25 +88,26 @@ nav .logo
 }
 .music-info
 {
-    height: 85px;
+    height: 110px;
     position: relative;
 }
 .music-info .star-img img
 {
     width: 85px;
     height: 85px;
-    top: 15px;
-    left: 10px;
+    top: 18px;
+    left: 15px;
     position: absolute;
     display: block;
     border-radius: 50px;
     cursor: pointer;
     transform: rotate(0deg);
+    box-shadow: rgb(215, 249, 133) 0px 0px 10px;
 }
 .music-info .star-info
 {
     position: absolute;
-    top: 50px;
+    top: 53px;
     left: 150px;
     cursor: pointer;
     display: inline-block;
@@ -117,27 +115,32 @@ nav .logo
 }
 .music-doing
 {
-    height: 86px;
+    height: 66px;
 }
 .music-doing .music-do
 {
     color: aqua;
     display: inline-block;
-    margin-top: 50px;
+    margin-top: 25px;
     margin-left: 22px;
 }
 .music-name
 {
-    padding: 20px;
+    padding: 53px;
     color: lime;
+}
+.music-audio
+{
+    max-width: 355px;
+    overflow: hidden;
 }
 .music-audio audio
 {
-   margin-left: 22px;
+    margin-left: 22px;
 }
 .music-button
 {
-    height: 115px;
+    height: 143px;
     position: relative;
 }
 .btn-play,.btn-pause,.btn-prev,.btn-next
@@ -166,8 +169,8 @@ nav .logo
 }
 .btn-play,.btn-pause
 {
-    left: 151px;
-    top: 44px;
+    left: 152px;
+    top: 42px;
 }
 .play
 {
@@ -180,16 +183,17 @@ nav .logo
 .btn-prev
 {
     left: 50px;
-    top: 50px;
+    top: 53px;
 }
 .btn-next
 {
-    top: 50px;
+    top: 53px;
     right: 50px;
 }
 .music-footer
 {
     color: #fff;
+    height: 47px;
 }
 .music-footer ul
 {
@@ -201,7 +205,7 @@ nav .logo
 {
     display: inline-block;
     margin-left: 20px;
-    width: 20px;
+    width: 24px;
     height: 20px;
     cursor: pointer;
     margin-bottom: 20px;

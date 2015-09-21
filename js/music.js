@@ -16,6 +16,7 @@
         //播放模式【single:单曲 all:全部 random:随机】
         this.playMode = "all";
         this.timer = "";
+        this.oloop = 1; //当前头像转动度数
 
         this.music = $(".music-wrapper");
         this.starImg = this.music.find("div.star-img img");
@@ -29,14 +30,21 @@
         this.btnRandom = this.music.find(".icon-ran");
         this.btnSin = this.music.find(".icon-sin");
         this.btnList = this.music.find("div.icon-list");
+        this.listInfo = $("div.music-list");
 
         _this.init(_this.settings.defaultIndex);
 
         this.btnPlay.click(function() {
             if (_this.musicAudio.paused) {
+                _this.timer = setInterval(function(){//定时器
+                    _this.starImg.css({
+                        transform : "rotate("+ (_this.oloop===360 ? _this.oloop=1 : _this.oloop+=1) +"deg)"
+                    });
+                }, 50);
                 _this.play("play");
                 _this.selectClass("play");
             } else {
+                clearInterval(_this.timer);
                 _this.play("pause");
                 _this.selectClass("pause");
             }
@@ -70,7 +78,7 @@
         });
 
         this.btnList.click(function() {
-            _this.music.fadeOut();
+           _this.listInfo.show().slideUp();
         });
 
         this.musicAudio.addEventListener("ended", function() {
@@ -163,10 +171,13 @@
                 self.starImg.fadeIn(200, function() {
                     var _this = $(this);
                     var loop = 1;
-                    self.timer = setInterval(function(){
+                    //再次清楚，否则会出现头像不断闪烁的问题
+                    clearInterval(self.timer);
+                    self.timer = setInterval(function(){//定时器
                         _this.css({
-                            transform : "rotate("+ (loop+=2) +"deg)"
+                            transform : "rotate("+ (loop === 360 ? loop=1 : loop+=1) +"deg)"
                         });
+                        self.oloop = loop; //保存当前头像转动度数
                     }, 50);
                 });
             });
