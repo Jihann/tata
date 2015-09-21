@@ -4,11 +4,18 @@
 ;(function($, window, document, undefined) {
     var MusicPlayer = function() {
         var _this = this;
+
+        this.settings = {
+            defaultIndex : 0,  //默认歌曲播放序号
+            volume : 0.2 //默认音量
+        };
         this.document = document;
-        this.index = 1;
-        this.currentIndex = -1;
+        this.currentIndex = 0; //当前音乐播放的序号
         this.musicList = musicList;
         this.musicAudio = null;
+        //播放模式【single:单曲 all:全部 random:随机】
+        this.playMode = "all";
+        this.timer = "";
 
         this.music = $(".music-wrapper");
         this.starImg = this.music.find("div.star-img img");
@@ -20,12 +27,13 @@
         this.btnNext = this.music.find("div.btn-next");
         this.btnAma = this.music.find(".icon-ama");
         this.btnRandom = this.music.find(".icon-ran");
+        this.btnSin = this.music.find(".icon-sin");
         this.btnList = this.music.find("div.icon-list");
 
-        _this.init(_this.index);
+        _this.init(_this.settings.defaultIndex);
 
         this.btnPlay.click(function() {
-            if (_this.btnPlay.hasClass("play")) {
+            if (_this.musicAudio.paused) {
                 _this.play("play");
                 _this.selectClass("play");
             } else {
@@ -52,12 +60,13 @@
         });
 
         this.btnRandom.click(function() {
-            var index = parseInt(_this.musicList.length * Math.random(), 10);
-            if (index === _this.currentIndex) {
-                index += 1;
-            }
-            _this.init(index); //通过随机数获取当前数据中的数据
-            _this.currentIndex = index; //保存当前索引，由下面左右键自行加减
+            _this.playMode = "random";
+            _this.changeAction("random");
+        });
+
+        this.btnSin.click(function() {
+            _this.playMode = "single";
+            _this.changeAction("single");
         });
 
         this.btnList.click(function() {
@@ -65,15 +74,28 @@
         });
 
         this.musicAudio.addEventListener("ended", function() {
-           _this.play("next");
+            if (_this.playMode === "single") {
+                _this.changeAction("single");
+                _this.init(_this.currentIndex);
+            } else if (_this.playMode === "random") {
+                var index = parseInt(_this.musicList.length * Math.random(), 10);
+                if (index === _this.currentIndex) {
+                    index += 1;
+                }
+                _this.currentIndex = index; //保存当前索引，由下面左右键自行加减
+                _this.init(_this.currentIndex);
+            } else {
+                _this.play("next");
+            }
         }, false);
     };
     MusicPlayer.prototype = {
         init : function(index) {
             var self = this;
             self.musicAudio = self.audio.get(0);
-            self.musicAudio.volume = 0.2;
-            self.starImg.attr("src", self.musicList[index]["img"]);
+            self.musicAudio.volume = self.settings.volume;
+            //头像在转动
+            self.repeat(index);
             self.starName.text(self.musicList[index]["star"]);
             self.musicName.text(self.musicList[index]["name"]);
             self.audio.attr("src", self.musicList[index]["url"]);
@@ -95,17 +117,13 @@
         change : function(status) {
             var len = this.musicList.length;
             if (status === "prev") {
-                if (this.currentIndex === -1) {
-                    this.currentIndex = 0;
-                } else if (this.currentIndex === 0) {
+                if (this.currentIndex === 0) {
                     this.currentIndex = len - 1;
                 } else {
                     this.currentIndex--;
                 }
             } else if (status === "next") {
-                if (this.currentIndex === -1) {
-                    this.currentIndex = 0 + 2; //我是默认加载第2条数据
-                } else if (this.currentIndex === (len - 1)) {
+                if (this.currentIndex === (len - 1)) {
                     this.currentIndex = 0;
                 } else {
                     this.currentIndex++;
@@ -113,12 +131,45 @@
             }
             this.init(this.currentIndex);
         },
+        changeAction : function(playMode) {
+            if (playMode === "single") {
+                if (this.currentIndex === 0) {
+                    this.currentIndex = 0;
+                }
+            } else if (playMode === "random") {
+                var index = parseInt(this.musicList.length * Math.random(), 10);
+                if (index === this.currentIndex) {
+                    index += 1;
+                }
+                this.currentIndex = index; //保存当前索引，由下面左右键自行加减
+            }
+        },
         selectClass : function(play) {
             if (play === "play") {
                 this.btnPlay.removeClass("play").addClass("pause").text("=");
             } else if (play === "pause") {
                 this.btnPlay.removeClass("pause").addClass("play").text("+");
             }
+        },
+        repeat : function(index) {
+            var self = this;
+            clearInterval(self.timer);
+            //当前头像慢慢消失，下一张延迟出现
+            self.starImg.fadeOut(1000, function() {
+                self.starImg.attr("src", self.musicList[index]["img"]);
+                self.starImg.css({
+                    transform : "rotate(0deg)"
+                });
+                self.starImg.fadeIn(200, function() {
+                    var _this = $(this);
+                    var loop = 1;
+                    self.timer = setInterval(function(){
+                        _this.css({
+                            transform : "rotate("+ (loop+=2) +"deg)"
+                        });
+                    }, 50);
+                });
+            });
         }
     };
     window["MusicPlayer"] = MusicPlayer;

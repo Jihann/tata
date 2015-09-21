@@ -3,16 +3,16 @@
  */
 var musicList = [
     {
-        star : '梁静茹',
-        name : '会呼吸的痛',
-        url : 'media/会呼吸的痛.mp3',
-        img : 'images/music/star/ljr.jpg'
-    },
-    {
         star : '维兹·卡利法',
         name : 'See you again',
         url : 'media/See You Again.mp3',
         img : 'images/music/star/su7.png'
+    },
+    {
+        star : '梁静茹',
+        name : '会呼吸的痛',
+        url : 'media/会呼吸的痛.mp3',
+        img : 'images/music/star/ljr.jpg'
     },
     {
         star : '徐良',

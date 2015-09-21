@@ -104,6 +104,7 @@ nav .logo
     display: block;
     border-radius: 50px;
     cursor: pointer;
+    transform: rotate(0deg);
 }
 .music-info .star-info
 {
@@ -215,6 +216,11 @@ nav .logo
     border: 2px solid red;
 }
 .icon-ran
+{
+    background-color: greenyellow;
+    border-radius: 20px;
+}
+.icon-sin
 {
     background-color: greenyellow;
     border-radius: 20px;
