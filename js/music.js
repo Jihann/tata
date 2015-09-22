@@ -2,6 +2,7 @@
  * Created by Jihann on 2015/9/19.
  */
 ;(function($, window, document, undefined) {
+    'use strict'
     var MusicPlayer = function() {
         var _this = this;
 

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        .canvas
+        {
+            border: 1px solid #aaa;
+            display: block;
+            margin: 50px auto;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"  width="1024" height="768" class="canvas">
+        当前浏览器不支持Canvas，请更换浏览器试试
+    </canvas>
+    <script type="text/javascript">
+        window.onload = function() {
+            var canvas = document.getElementById("canvas");
+            canvas.width = 1024;
+            canvas.height = 768;
+
+            if (canvas.getContext("2d")) {
+                var context = canvas.getContext("2d");
+
+                //context.beginPath();
+                //context.moveTo(100, 100);
+                //context.lineTo(700, 700);
+               // context.lineTo(100, 700);
+                //context.lineTo(100, 100);
+                //context.closePath();
+
+                //着色
+                //context.fillStyle = "rgb(2,100,30)";
+                //context.fill();
+
+                //绘图
+                //context.lineWidth = 5;
+                //context.strokeStyle = "red";
+                //context.stroke();
+
+                //context.beginPath();
+                //context.moveTo(200, 100);
+                //context.lineTo(700, 600);
+                //context.closePath();
+                //context.strokeStyle = "black";
+                //context.stroke();
+
+                context.lineWidth = 5;
+                context.strokeStyle = "#005588";
+                for (var i = 0; i < 10; i++) {
+                    context.beginPath();
+                    context.arc(50 + i*100, 60, 40, 0, 2*Math.PI*(i+1)/10);
+                    context.closePath();
+                    context.stroke();
+                }
+                for (var i = 0; i < 10; i++) {
+                    context.beginPath();
+                    context.arc(50 + i*100, 180, 40, 0, 2*Math.PI*(i+1)/10, true);
+                    context.stroke();
+                }
+            } else {
+                alert("浏览器不支持Canvas");
+            }
+        }
+    </script>
+</body>
+</html>
