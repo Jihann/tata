@@ -103,8 +103,7 @@
             var self = this;
             self.musicAudio = self.audio.get(0);
             self.musicAudio.volume = self.settings.volume;
-            //头像在转动
-            self.repeat(index);
+            self.repeat.call(self, index);
             self.starName.text(self.musicList[index]["star"]);
             self.musicName.text(self.musicList[index]["name"]);
             self.audio.attr("src", self.musicList[index]["url"]);
@@ -160,7 +159,7 @@
                 this.btnPlay.removeClass("pause").addClass("play").text("+");
             }
         },
-        repeat : function(index) {
+        repeat : function(index) {//让头像实现转动效果
             var self = this;
             clearInterval(self.timer);
             //当前头像慢慢消失，下一张延迟出现
