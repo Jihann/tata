@@ -113,6 +113,59 @@ nav .logo
     display: inline-block;
     color: #fff;
 }
+.music-time
+{
+    height: 20px;
+}
+.music-time .time-cur,.time-sum
+{
+    font-size: 15px;
+    color: greenyellow;
+}
+.time-cur
+{
+    margin-left: 40px;
+}
+.time-sum
+{
+    margin-left: 30px;
+}
+.progress-bar
+{
+    width: 333px;
+    height: 13px;
+    margin: 0 auto;
+    border-radius: 8px;
+    background-color: #cecfd4;
+    position: relative;
+    cursor: pointer;
+}
+.progress
+{
+    overflow: hidden;
+    width: 0;
+    height: 13px;
+    border-radius: 8px;
+    position: absolute;
+    background-color: #3792ef;
+}
+.music-volume
+{
+    width: 240px;
+    height: 5px;
+    margin: 0 auto 20px;
+    border-radius: 5px;
+    background-color: #cecfd4;
+    position: relative;
+    cursor: pointer;
+}
+.volume
+{
+    width: 48px;
+    height: 5px;
+    border-radius: 5px;
+    background-color: #3792ef;
+}
 .music-doing
 {
     height: 66px;
@@ -129,18 +182,9 @@ nav .logo
     padding: 53px;
     color: lime;
 }
-.music-audio
-{
-    max-width: 355px;
-    overflow: hidden;
-}
-.music-audio audio
-{
-    margin-left: 22px;
-}
 .music-button
 {
-    height: 143px;
+    height: 128px;
     position: relative;
 }
 .btn-play,.btn-pause,.btn-prev,.btn-next
@@ -193,7 +237,7 @@ nav .logo
 .music-footer
 {
     color: #fff;
-    height: 47px;
+    height: 35px;
 }
 .music-footer ul
 {

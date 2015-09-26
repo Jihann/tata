@@ -13,7 +13,6 @@
         this.document = document;
         this.currentIndex = 0; //当前音乐播放的序号
         this.musicList = musicList;
-        this.musicAudio = null;
         //播放模式【single:单曲 all:全部 random:随机】
         this.playMode = "all";
         this.timer = "";
@@ -32,11 +31,19 @@
         this.btnSin = this.music.find(".icon-sin");
         this.btnList = this.music.find("div.icon-list");
         this.listInfo = $("div.music-list");
+        this.progress = this.music.find("div.progress-bar");
+        this.musCurTime = this.music.find("span.time-cur");
+        this.musSumTime = this.music.find("span.time-sum");
+        this.musicVolume = this.music.find("div.music-volume");
 
+        this.musicAudio = this.audio.get(0); // 音频元素
+
+        _this.musicAudio.volume = _this.settings.volume;
         _this.init(_this.settings.defaultIndex);
 
         this.btnPlay.click(function() {
             if (_this.musicAudio.paused) {
+                clearInterval(_this.timer);
                 _this.timer = setInterval(function(){//定时器
                     _this.starImg.css({
                         transform : "rotate("+ (_this.oloop===360 ? _this.oloop=1 : _this.oloop+=1) +"deg)"
@@ -97,12 +104,47 @@
                 _this.play("next");
             }
         }, false);
+
+        //显示进度条
+        this.musicAudio.addEventListener("timeupdate", function() {
+            //获取歌曲播放的时间总长
+            var duraTime  = _this.musicAudio.duration;//s
+            if (duraTime && typeof duraTime === "number") {
+                //获取进度条总宽度
+                var progressWidth = _this.progress.width();
+                var currTime = _this.musicAudio.currentTime;
+                var scale = currTime / duraTime;
+                var progressValue = progressWidth * scale;
+                //显示进度时长和歌曲总时长
+                _this.showTime(currTime, 1);
+                _this.showTime(duraTime, 2);
+                _this.progress.find("div.progress").width(progressValue + "px");
+            }
+        }, false);
+
+        this.progress.on('click', function(e) {
+            var clientX = e.clientX;
+            var progressWidth = _this.progress.width();
+            var progressValue = clientX - this.getBoundingClientRect().left;
+            progressValue = progressValue && typeof progressValue === "number" && Math.ceil(progressValue);
+            var val = progressValue / progressWidth * _this.musicAudio.duration;
+            _this.progress.find("div.progress").width(progressValue + "px");
+        });
+
+        this.musicVolume.on('click', function(e) {
+            var clientX = e.clientX;
+            var volumeWidth = _this.musicVolume.width();
+            var volumeValue = clientX - this.getBoundingClientRect().left;
+            volumeValue = volumeValue && typeof volumeValue === "number" && Math.ceil(volumeValue);
+            //默认显示音量宽度为 初始音量0.2 * 总宽度240 = 48px
+            //音量进度条占总区域的百分比,音量大小在0.1和1.0之间
+            _this.musicAudio.volume = volumeValue / volumeWidth;
+            _this.musicVolume.find("div.volume").width(volumeValue + "px");
+        });
     };
     MusicPlayer.prototype = {
         init : function(index) {
             var self = this;
-            self.musicAudio = self.audio.get(0);
-            self.musicAudio.volume = self.settings.volume;
             self.repeat.call(self, index);
             self.starName.text(self.musicList[index]["star"]);
             self.musicName.text(self.musicList[index]["name"]);
@@ -175,12 +217,30 @@
                     clearInterval(self.timer);
                     self.timer = setInterval(function(){//定时器
                         _this.css({
-                            transform : "rotate("+ (loop === 360 ? loop=1 : loop+=1) +"deg)"
+                            transform : "rotate("+ (loop===360 ? loop=1 : loop+=1) +"deg)"
                         });
                         self.oloop = loop; //保存当前头像转动度数
                     }, 50);
                 });
             });
+        },
+        showTime : function(musicSeconds, num) {
+            var time = this.getTime(musicSeconds);
+            num && num === 1 && this.musCurTime.html(time['minute'] + ":" + time['seconds']);
+            num && num === 2 && this.musSumTime.html(time['minute'] + ":" + time['seconds']);
+        },
+        getTime : function(musicSeconds) {
+            var time = [];
+            var minute, seconds;
+            if (musicSeconds && typeof musicSeconds === "number") {
+                minute = Math.floor((musicSeconds / 60) % 60);
+                seconds = Math.floor(musicSeconds % 60);
+            }
+            minute = (minute < 10) ? "0" + minute : minute;
+            seconds = (seconds < 10) ? "0" + seconds : seconds;
+            time['minute'] = minute;
+            time['seconds'] = seconds;
+            return time;
         }
     };
     window["MusicPlayer"] = MusicPlayer;
